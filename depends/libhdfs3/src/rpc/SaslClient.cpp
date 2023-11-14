@@ -74,9 +74,6 @@ void SaslClient::initKerberos(const RpcSaslProto_SaslAuth & auth,
 
     /* Create new authentication session. */
     if ((rc = gsasl_client_start(ctx, auth.mechanism().c_str(), &session)) != GSASL_OK) {
-        std::cout << std::string(50, '#') << "hrh:" << auth << stod::endl;
-        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism() << stod::endl;
-        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism().c_str() << stod::endl;
         THROW(HdfsIOException, "AAA Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
     }
 
@@ -112,9 +109,6 @@ void SaslClient::initDigestMd5(const RpcSaslProto_SaslAuth & auth,
     int rc;
 
     if ((rc = gsasl_client_start(ctx, auth.mechanism().c_str(), &session)) != GSASL_OK) {
-        std::cout << std::string(50, '#') << "hrh:" << auth << stod::endl;
-        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism() << stod::endl;
-        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism().c_str() << stod::endl;
         THROW(HdfsIOException, "Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
     }
 
