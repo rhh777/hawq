@@ -74,8 +74,10 @@ void SaslClient::initKerberos(const RpcSaslProto_SaslAuth & auth,
 
     /* Create new authentication session. */
     if ((rc = gsasl_client_start(ctx, auth.mechanism().c_str(), &session)) != GSASL_OK) {
-        THROW(HdfsIOException, "Cannot initialize client (%d): %s", rc,
-              gsasl_strerror(rc));
+        std::cout << std::string(50, '#') << "hrh:" << auth << stod::endl;
+        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism() << stod::endl;
+        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism().c_str() << stod::endl;
+        THROW(HdfsIOException, "AAA Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
     }
 
     gsasl_property_set(session, GSASL_SERVICE, auth.protocol().c_str());
@@ -110,7 +112,10 @@ void SaslClient::initDigestMd5(const RpcSaslProto_SaslAuth & auth,
     int rc;
 
     if ((rc = gsasl_client_start(ctx, auth.mechanism().c_str(), &session)) != GSASL_OK) {
-        THROW(HdfsIOException, "Cannot initialize client (%d): %s", rc, gsasl_strerror(rc));
+        std::cout << std::string(50, '#') << "hrh:" << auth << stod::endl;
+        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism() << stod::endl;
+        std::cout << std::string(50, '#') << "hrh:" << auth.mechanism().c_str() << stod::endl;
+        THROW(HdfsIOException, "Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
     }
 
     std::string password = Base64Encode(token.getPassword());
