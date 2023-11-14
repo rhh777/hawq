@@ -109,7 +109,7 @@ void SaslClient::initDigestMd5(const RpcSaslProto_SaslAuth & auth,
     int rc;
 
     if ((rc = gsasl_client_start(ctx, auth.mechanism().c_str(), &session)) != GSASL_OK) {
-        THROW(HdfsIOException, "Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
+        THROW(HdfsIOException, "BBB Cannot initialize client (%d): %s, %s", rc, gsasl_strerror(rc), auth.mechanism().c_str());
     }
 
     std::string password = Base64Encode(token.getPassword());
